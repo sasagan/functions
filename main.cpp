@@ -9,27 +9,19 @@
 
 #pragma comment (lib, "opengl32.lib")
 
-int widthWindow;
-int heightWindow;
-int* pwidthWindow = &widthWindow;
-int* pheightWindow = &heightWindow;
-
-//float pointx[2] = { widthWindow / 2, 0};
-//float pointx[2] = { heightWindow / 2, 0};
 
 void coordinatePlane();
 
-void WindowOpen(int a, int h)
+void WindowOpen(int w, int h)
 {
-	if (h == 0)
-	{
-		h = 1;
-	}
-	float ratio = 1.0 * a / h;
 	
+	if (h == 0) h = 0;
+	if (w == 0) w = 0;
+	float ratio = 1.0 * w / h;
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glViewport(0, 0, a, h);
+	glViewport(0, 0, w, h);
 	gluPerspective(45, ratio, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 }
@@ -50,11 +42,22 @@ void coordinatePlane()
 	glLineWidth(1);
 	glBegin(GL_LINES);
 	glColor3f(1.0, 1.0, 1.0);
-	glVertex2f(*pwidthWindow, 0);
-	glVertex2f(-*pwidthWindow, 0);//x-axis
+	glVertex2f(4, 0);
+	glVertex2f(-4, 0);//x-axis
+
+	glVertex2f(4, 0);
+	glVertex2f(4 - 0.5, 0.2);
+	glVertex2f(4, 0);
+	glVertex2f(4 - 0.5, -0.2);
 	
-	glVertex2f(0, *pheightWindow);
-	glVertex2f(0, -*pheightWindow);//y-axis
+	glVertex2f(0, 4);
+	glVertex2f(0, -4);//y-axis
+
+	glVertex2f(0, 4);
+	glVertex2f(0.2, 4 - 0.5);
+	glVertex2f(0, 4);
+	glVertex2f(-0.2, 4 - 0.5);
+	
 
 	glEnd();
 }
@@ -88,8 +91,6 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("Window");
-	widthWindow = glutGet(GLUT_SCREEN_WIDTH);
-	heightWindow = glutGet(GLUT_SCREEN_HEIGHT);
 
 	glutDisplayFunc(quad);
 	glutReshapeFunc(WindowOpen); 
