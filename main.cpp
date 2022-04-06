@@ -162,7 +162,6 @@ float interpreter(float x, string f)
             else if (c_f[i] == 'x')
             {
                 arrNum.push_back(x);
-                //i += 1;
             }
             else if (c_f[i] == 'c' && c_f[i + 1] == 'o' && c_f[i + 2] == 's')
             {
@@ -201,35 +200,37 @@ float interpreter(float x, string f)
                         arrNum.pop_back();
 
                     }
-                    switch (arrToken[arrToken.size() - 2])
+                    if (arrToken.size() >= 2)
                     {
-                    case 's':
-                        arrNum[arrNum.size() - 1] = Sin(arrNum[arrNum.size() - 1]);
+                        switch (arrToken[arrToken.size() - 2])
+                        {
+                        case 's':
+                            arrNum[arrNum.size() - 1] = Sin(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'c':
+                            arrNum[arrNum.size() - 1] = Cos(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'g':
+                            arrNum[arrNum.size() - 1] = Ctg(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 't':
+                            arrNum[arrNum.size() - 1] = Tg(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'n':
+                            arrNum[arrNum.size() - 1] = Ln(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'l':
+                            arrNum[arrNum.size() - 1] = Lg(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        }
                         arrToken.pop_back();
-                        break;
-                    case 'c':
-                        arrNum[arrNum.size() - 1] = Cos(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 'g':
-                        arrNum[arrNum.size() - 1] = Ctg(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 't':
-                        arrNum[arrNum.size() - 1] = Tg(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 'n':
-                        arrNum[arrNum.size() - 1] = Ln(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 'l':
-                        arrNum[arrNum.size() - 1] = Lg(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
                     }
-                    arrToken.pop_back();
-                    // i++;
                 }
 
 
@@ -270,35 +271,38 @@ float interpreter(float x, string f)
                         arrNum.pop_back();
 
                     }
-                    switch (arrToken[arrToken.size() - 2])
+                    if (arrToken.size() >= 2)
                     {
-                    case 's':
-                        arrNum[arrNum.size() - 1] = Sin(arrNum[arrNum.size() - 1]);
+                        switch (arrToken[arrToken.size() - 2])
+                        {
+                        case 's':
+                            arrNum[arrNum.size() - 1] = Sin(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'c':
+                            arrNum[arrNum.size() - 1] = Cos(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'g':
+                            arrNum[arrNum.size() - 1] = Ctg(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 't':
+                            arrNum[arrNum.size() - 1] = Tg(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'n':
+                            arrNum[arrNum.size() - 1] = Ln(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        case 'l':
+                            arrNum[arrNum.size() - 1] = Lg(arrNum[arrNum.size() - 1]);
+                            arrToken.pop_back();
+                            break;
+                        }
                         arrToken.pop_back();
-                        break;
-                    case 'c':
-                        arrNum[arrNum.size() - 1] = Cos(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 'g':
-                        arrNum[arrNum.size() - 1] = Ctg(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 't':
-                        arrNum[arrNum.size() - 1] = Tg(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 'n':
-                        arrNum[arrNum.size() - 1] = Ln(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
-                    case 'l':
-                        arrNum[arrNum.size() - 1] = Lg(arrNum[arrNum.size() - 1]);
-                        arrToken.pop_back();
-                        break;
                     }
-                    arrToken.pop_back();
-                    // i++;
+                    
                 }
                 else
                 {
@@ -336,18 +340,6 @@ float interpreter(float x, string f)
             arrNum.push_back(num);
         }
     }
-
-    /*cout << "numbers:" << endl;
-    for (int i = 0; i < arrNum.size(); i++)
-    {
-        cout << arrNum[i] << endl;
-    }
-    cout << "tokens:" << endl;
-    for (int i = 0; i < arrToken.size(); i++)
-    {
-        cout << arrToken[i] << endl;
-    }*/
-
     return arrNum[0];
 }
 
@@ -417,16 +409,17 @@ void quad(void)
 
 int main(int argc, char* argv[])
 {
-	cin >> command;
+   
+        cin >> command;
 
-		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-		glutInitWindowSize(600, 600);
-		glutCreateWindow("Window");
+        glutInit(&argc, argv);
+        glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+        glutInitWindowSize(600, 600);
+        glutCreateWindow("Window");
 
-		glutDisplayFunc(quad);
-		glutReshapeFunc(WindowOpen);
-		glutMainLoop();
-
+        glutDisplayFunc(quad);
+        glutReshapeFunc(WindowOpen);
+        glutMainLoop();
+   
 	return 0;
 }
