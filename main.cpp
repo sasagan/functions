@@ -172,13 +172,17 @@ float interpreter(float x, string f)
                         arrToken.pop_back();
                     }
                 }
+                else
+                {
+                    arrToken.push_back(c_f[i]);
+                }
 
 
                 if (c_f[i] == '(' && c_f[i + 1] == '-')
                 {
                     arrNum.push_back(0);
                 }
-                arrToken.push_back(c_f[i]);
+                
 
             }
             else if (arrNum.size() >= 2)
